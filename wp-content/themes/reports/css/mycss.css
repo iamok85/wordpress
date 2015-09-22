@@ -1,0 +1,788 @@
+
+/* -----------------------------------------------------------------------
+ My CSS over-rides will be put here
+----------------------------------------------------------------------- */
+/* The top logo */
+.navbar  a.brand {
+    text-decoration: none;
+    font-size: 16px;
+/*    margin-left: 400px;*/
+}
+
+
+/* mycss.css */
+#page {
+/*    background: none repeat scroll 0 0 white;*/
+    border: none;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+#header {
+    border-top: none;
+}
+.container {
+    width: 100%;
+}
+
+#content {
+    padding-top: 10px;
+    width: 1200px;
+    padding-right: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.span-19 {
+    width: 1000px;
+/*    width: 75%;*/
+    margin-left: 5px;
+    margin-top: 18px;
+    padding-top: 10px;
+}
+#sidebar {
+    padding: 20px 0;
+}
+.span-5 {
+    width: 190px;
+/*    width: 19%;*/
+    margin-right: 1px;
+    margin-left: 10px;
+
+    height:auto;
+    position:absolute;top:120px; right:2px;
+}
+.span-18 {
+    width: 190px;
+/*    width: 19%;*/
+    margin-right: 1px;
+    margin-left: 10px;
+
+    height:auto;
+    position:absolute;top:90px; right:2px;
+}
+h1 {
+    font-size: 28px;
+}
+
+
+tfoot tr td {
+    font-style: normal;
+    font-weight:bolder;
+}
+
+div.form label {
+    display: inline-block;
+    width: 250px;
+    margin-right: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: right;
+}
+
+/* Each line in a form (is displayed as a row) */
+div.form .row {
+    margin: 12px 0;
+}
+
+/* To set the width of input boxes and text-areas */
+input, textarea, select, .uneditable-input {
+    width: 306px;
+}
+
+select {
+     background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;    
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+select:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+div.cleditorMain {
+    display: inline-block;
+    margin: 0.2em 0 0.5em;
+    width: 306px;
+
+    border-radius: 4px 4px 4px 4px;
+    color: #555555;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+
+    /* grid border */
+    .grid-view table.items th, .grid-view table.items td {
+        border: 1px solid #CCCCCC !important;
+    }
+
+    /* disable selected for merged cells */
+    .grid-view td.merge {
+       background: none repeat scroll 0 0 #F8F8F8;
+    }
+
+    /* disable selected for extrarow in bootstrap */
+    table.table td.extrarow, table.table td.extrarow:hover {
+       background: none repeat scroll 0 0 #E0E0E0;
+    }
+
+    /* The button column for grid view */
+    .grid-view .button-column{
+        width: 70px;
+    }
+
+    .grid-view table.items th {
+        background: url("bg.gif") repeat scroll left top white;
+    }
+
+    .grid-view .summary {
+        text-align: left;
+    }
+
+/*    border: 1px solid #CCCCCC;
+    display: table-cell;*/
+
+
+/*
+root element for the scrollable.  when scrolling occurs this
+element stays still.
+*/
+.scrollable {
+  /* required settings */
+  position:relative;
+  overflow:hidden;
+  width: 380px;
+  height:48px;
+}
+
+div.scroll-div{
+    clear: both;
+    margin:0 auto; width: 480px; height:58px;
+    margin-bottom: 40px;
+}
+
+/*
+root element for scrollable items. Must be absolutely positioned
+and it should have a extremely large width to accommodate scrollable
+items.  it's enough that you set width and height for the root element
+and not for this element.
+*/
+.scrollable .items {
+  /* this cannot be too large */
+  width:20000em;
+  position:absolute;
+}
+
+/*
+a single item. must be floated in horizontal scrolling.  typically,
+this element is the one that *you* will style the most.
+*/
+.items div {
+  float:left;
+}
+
+
+span.scroll-years {
+    display: inline-block;
+    padding: 2px 3px 2px 3px;
+    margin: 5px;
+/*    margin-right: 5px;*/
+/*    width: 25px;*/
+/*    border: 1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    border-collapse:collapse;*/
+}
+
+
+#spinnedr {
+    height: 400px;
+    position: relative;
+    background-color: gray; /* for demonstration */
+}
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px; /* -1 * image width / 2 */
+    margin-top: -32px;  /* -1 * image height / 2 */
+    display: block;
+}
+
+img.img-overlay{
+/*    display: block;
+    height: 50px;
+    width: 400px;
+    background-color: gray;
+    position: relative;
+    text-align: center;*/
+    left: 50%;
+    top: 80%;
+}
+
+div#form-wrap{
+
+/*    clear: both;*/
+
+/*    content: "";
+    display: table;*/
+
+/*    width: 89em;*/
+    margin-bottom: 1.2em;
+
+    border: 1px solid #E5E5E5;
+    padding: 5px 30px;
+    -moz-border-radius: 13px 13px;
+    -webkit-border-radius: 13px 13px;
+    border-radius: 13px 13px;
+
+    background: url("images/ui-bg_glass_65_ffffff_1x400.png") repeat-x scroll 50% top #FFFFFF;
+/*    border: 1px solid #DDDDDD;*/
+    color: #333333;
+
+    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+}
+
+div#form-wrap h1{
+    margin-bottom: 15px;;
+    text-align: center;
+}
+
+span.question {
+  cursor: pointer;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-color: #89A4CC;
+  line-height: 14px;
+  color: White;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 7px;
+  text-align: center;
+  position: relative;
+}
+span.question:hover { background-color: #3D6199; }
+div.tooltip {
+  background-color: #3D6199;
+  color: White;
+  position: absolute;
+  left: 25px;
+  top: -25px;
+  z-index: 1000000;
+  width: 250px;
+  border-radius: 5px;
+}
+div.tooltip:before {
+  border-color: transparent #3D6199 transparent transparent;
+  border-right: 6px solid #3D6199;
+  border-style: solid;
+  border-width: 6px 6px 6px 0px;
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  line-height: 0;
+  position: absolute;
+  top: 40%;
+  left: -6px;
+}
+div.tooltip p {
+  margin: 10px;
+  color: White;
+}
+
+
+div.table-row{
+    line-height: 20px;
+    /* padding: 5px; */
+}
+
+div.left-col, div.right-col, div.sub-left-col, div.sub-right-col {
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 20px;
+    text-align: right;    
+    margin-bottom: 5px;
+    line-height: 20px;
+    vertical-align: top;
+}
+
+div.left-col {
+    width: 30%;
+}
+
+div.right-col {
+    font-weight: normal;
+    text-align: left;
+    width: 65%;
+}
+
+div.sub-left-col{
+    width: 25%;
+}
+
+div.sub-right-col{
+    font-weight: normal;
+    text-align: left;
+    width: 50%;
+}
+
+ul.tagit {
+    display: inline-block;
+    margin: 0.2em 0 0.5em;
+    margin-left: 3px;
+    vertical-align:bottom;
+    width: 300px;
+}
+
+ul#extraNotificationList {
+    
+}
+
+ul.tagit input[type="text"] {
+    width: 300px;
+}
+
+.grid-view .filters input, .grid-view .filters select  {
+    width: 90% !important;
+}
+
+
+#mainmenu ul li a {
+/*    float: none;*/
+/*    padding: 10px 15px 10px;*/
+    color: #777777;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #ffffff;
+}
+
+
+div.navbar-inner div.container {
+    float: left;
+    margin-left: 1em;
+}
+
+
+/* Applying CSS for my main tabs */
+.mynav-tabs > li > a {
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    line-height: 20px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+.mynav-tabs > li > a, .mynav-pills > li > a {
+    line-height: 14px;
+    margin-right: 2px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.mynav > li > a {
+    display: block;
+}
+.nav > li > a {
+    text-decoration: none;  /* removing text deco. from the section tabs */
+}
+
+a {
+    color: #0088CC;
+    text-decoration: none;
+}
+a {
+    color: #0066CC;
+    text-decoration: underline;
+}
+
+.mytabbable:before, .mytabbable:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.mytabbable:after {
+    clear: both;
+}
+.mytabbable:before, .mytabbable:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+
+.mynav {
+    border: 0 none;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.mynav-tabs:before, .mynav-pills:before, .mynav-tabs:after, .mynav-pills:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.mynav-tabs:after, .mynav-pills:after {
+    clear: both;
+}
+.mynav-tabs:before, .mynav-pills:before, .mynav-tabs:after, .mynav-pills:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.mynav-tabs {
+    border-bottom: 1px solid #DDDDDD;
+}
+.mynav-tabs, .mynav-pills {
+}
+.mynav {
+    list-style: none outside none;
+    margin-bottom: 20px;
+    margin-left: 0;
+}
+
+
+.mynav-tabs > li {
+    margin-bottom: -1px;
+}
+.mynav-tabs > li, .mynav-pills > li {
+    float: left;
+}
+
+/* BootStrap breadcrub */
+.breadcrumb {
+    margin: 0 0 10px;
+}
+
+/* This is to display the 'x' next to the name */
+ul.tagit li.tagit-choice span.tagit-label{
+    display: inline-block;
+    margin-right: .9em;
+}
+ul.tagit li.tagit-choice a.tagit-close span.text-icon {
+    color: #8B0000;
+    font-weight: bold;
+}
+
+
+/* This is to make the breadcrumb stay at top */
+.breadcrumb {
+    top: 40px;
+}
+.breadcrumb, div.tabbable {
+    left: 0;
+    margin-bottom: 10;
+    position: fixed;
+    right: 0;
+/*	z-index: 1030;	*/
+}
+.breadcrumb, div.tabbable {
+    margin-bottom: 20px;
+    overflow: visible;
+}
+
+div.tabbable{
+    top: 60px;
+    padding-top: 5px;
+    background-color: white;
+}
+
+
+
+
+/*  students form */
+/*div.action-set{
+    float: right;
+    display: inline-block;
+}*/
+
+/* Edit and Save buttons */
+div.action-set .edit-button, div.action-set .save-button, div.action-set .cancel-edit-button{
+    display: none;
+}
+
+div.tab-content{
+    margin-top: 70px;
+}
+
+div.action-set{
+    right: 250px;
+    margin-bottom: 10;
+    position: fixed;
+    z-index: 1030;
+    top: 130px;
+}
+div.action-set a{
+    text-decoration: none;
+}
+
+
+
+legend {
+    font-size: 1.2em;
+}
+
+/* The fieleds with * are required note */
+div.form p.note.fixed {
+/*    left: 800px;*/
+    position: fixed;
+/*    right: 0;*/
+display: inline-block;    
+    top: 135px;
+    width: 100%;
+    left: 0;
+    padding-left: 25px;
+    padding-bottom: 5px;
+    background-color: white;
+    z-index: 1025;
+}
+
+
+div.form div.errorSummary{
+    margin-top: 30px;
+}
+
+div.ui-dialog{
+    top: 150px !important;
+}
+
+div.ui-dialog .modal-footer{
+    background-color: #EEEEEE;
+}
+
+div.ui-dialog.ui-widget.ui-widget-content{
+    z-index:3000;
+/*    position:fixed;*/
+}
+
+/* CSS style upload button */
+.ui-widget-content a.up-button, .up-button {
+/*   display: block;*/
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   margin-left: 10px;
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   cursor: pointer;  cursor: hand;/* as different browsers use different names. */
+   }
+.ui-widget-content a.up-button:hover, .up-button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.ui-widget-content a.up-button:active, .up-button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+
+a.button {
+   color: #FFFFFF;
+   text-decoration: underline;
+   font-weight: bold;
+    cursor: pointer;  cursor: hand;/* as different browsers use different names. */
+}
+
+
+table.attachments-tbl {
+    background: none repeat scroll 0 0 #FFFFFF;
+    height: auto;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+/***********************/
+
+/*User Table (blue) */
+table.users-table-blue
+{
+font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+/*width:100%;*/
+border-collapse:collapse;
+}
+.users-table-blue td, .users-table-blue th
+{
+font-size:12px;
+border:1px solid #8DB6CD;
+padding:3px 10px 2px 10px;
+}
+.users-table-blue th
+{
+font-size:12px;
+text-align:left;
+padding-top:5px;
+padding-bottom:4px;
+background-color:#8DB6CD;
+color:#ffffff;
+}
+.users-table-blue tr.alt td
+{
+color:#000000;
+background-color:#EAF2D3;
+}
+
+
+/* Comments div */
+div.comment_area{
+    max-height: 100px;
+    white-space: pre;
+  font-family: monospace;
+  display: block;
+    overflow-y: scroll;
+}
+/* 'Upload' button */
+.qq-upload-button {
+    background: none repeat scroll 0 0 #6FACCF;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+table.yiiLog{
+    display: none;
+}
+
+/* Bring in Bootstrap 3 panels!                                                    */
+/* http://stackoverflow.com/questions/19220027/can-you-use-panels-in-bootstrap-2-3 */
+
+.panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+.panel-success {
+  border-color: #d6e9c6;
+}
+
+.panel-success .panel-heading {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.panel-warning {
+  border-color: #fbeed5;
+}
+
+.panel-warning .panel-heading {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+
+.panel-danger {
+  border-color: #eed3d7;
+}
+
+.panel-danger .panel-heading {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.panel-info {
+  border-color: #bce8f1;
+}
+
+.panel-info .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+/* NICTA Custom */
+.panel-nicta-green {
+  border-color: #c2deb2;
+}
+
+.panel-nicta-green .panel-heading {
+  color: #5da733;
+  background-color: #d7e9cd;
+  border-color: #c2deb2;
+}
+
+.panel-nicta-purple {
+  border-color: #a086d1;
+}
+
+.panel-nicta-purple .panel-heading {
+  color: #8d65d2;
+  background-color: #e3d9f4;
+  border-color: #a086d1;
+}
+
+/* END panel definition from bootstrap 3
+
+/* extra misc definitions and overrides */
+.text-center {
+	text-align: center;
+}
+
+.background-white {
+	background: #FFF;
+}
+
+.no-margin {
+	margin: 0;
+}
+input.field_list,input.filter_types, input.operator_types,td.associated_table>input,td.associated_field>input,td.main_search_field>input,td.relation_type>input{
+	border:none; 
+	background:#FFF
+}

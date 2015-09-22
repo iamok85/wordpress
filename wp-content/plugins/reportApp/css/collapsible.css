@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+.collapse-open div span {
+	display:block;
+    float:right;
+    background:url(../img/minus.png) center center no-repeat; 
+	padding:10px;
+}
+.accordion-close div span,
+.collapse-close div span {
+    display:block;
+    float:right;
+    background:url(../img/plus.png) center center no-repeat;
+    padding:10px; }

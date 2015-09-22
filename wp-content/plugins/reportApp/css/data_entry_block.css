@@ -1,0 +1,27 @@
+ .draggable {
+		padding: 0.5em;
+		float: left;
+		margin: 10px 10px 10px 0; 
+}
+
+ .droppable {
+		width: 150px;
+		height: 150px; 
+		padding: 0.5em; 
+		float: left; 
+		margin: 10px; 
+}
+
+.delete_field{
+background: transparent url('../images/delete_default.png') no-repeat scroll;
+}
+.delete_field:hover{
+background: transparent url('../images/delete_active.png') no-repeat scroll;
+}
+
+div.add_field{
+background: transparent url('../images/add_default.png') no-repeat scroll;
+}
+div.add_field:hover{
+background: transparent url('../images/add_active.png') no-repeat scroll;
+}
