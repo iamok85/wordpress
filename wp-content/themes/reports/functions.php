@@ -1,33 +1,19 @@
 <?php
-/**
- * Twenty Thirteen functions and definitions
- *
- * Sets up the theme and provides some helper functions, which are used in the
- * theme as custom template tags. Others are attached to action and filter
- * hooks in WordPress to change core functionality.
- *
- * When using a child theme (see https://codex.wordpress.org/Theme_Development
- * and https://codex.wordpress.org/Child_Themes), you can override certain
- * functions (those wrapped in a function_exists() call) by defining them first
- * in your child theme's functions.php file. The child theme's functions.php
- * file is included before the parent theme's file, so the child theme
- * functions would be used.
- *
- * Functions that are not pluggable (not wrapped in function_exists()) are
- * instead attached to a filter or action hook.
- *
- * For more information on hooks, actions, and filters, @link https://codex.wordpress.org/Plugin_API
- *
- * @package WordPress
- * @subpackage Twenty_Thirteen
- * @since Twenty Thirteen 1.0
- */
 
-/*
- * Set up the content width value based on the theme's design.
- *
- * @see reportApp_content_width() for template-specific adjustments.
- */
+include('lib/controllers/SearchTable.php');
+include('lib/controllers/SQLConstructor.php');
+
+include 'lib/controllers/SearchPost.php';
+include 'lib/controllers/ReportsSearchPost.php';
+
+include 'lib/helper/CommonHelper.php';
+
+include 'lib/manager/BaseManager.php';
+include 'lib/manager/ReportsManager.php';
+
+include 'lib/factory/ReportAppFactory.php';
+
+
 if ( ! isset( $content_width ) )
 	$content_width = 604;
 
@@ -560,7 +546,11 @@ function my_scripts_method() {
 			'data_graph'=> get_bloginfo('template_directory')."/js/data_graph.js",
 			'canvasjs'=>get_bloginfo('template_directory')."/js/canvasjs-1.6.0/canvasjs.min.js",
 			'bootstrap'=>get_bloginfo('template_directory')."/js/bootstrap.min.js",
-			'result'=>get_bloginfo('template_directory')."/js/result.js"
+			'result'=>get_bloginfo('template_directory')."/js/result.js",
+			'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
+			'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
+			'google_api1'=>'http://maps.googleapis.com/maps/api/js?key=AIzaSyCfeQCllzZWaN8HcqP8QsxJp5UqGzPkWjg&sensor=false&libraries=places',
+			'google_api2'=>'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js'
 		);
 	
 	foreach($_scripts as $handle=>$src){

@@ -189,7 +189,7 @@ function plugin_join($join) {
 				$entity =new $entity_class;		
 				$name_field=$entity->get_name_field();
 				$title_field=$entity->get_title_field();
-				debug($key.'==='.$name_field[0]);
+				//debug($key.'==='.$name_field[0]);
 				if($key==$name_field[0])
 					$post->post_name= $field;
 				if($key==$title_field[0])
