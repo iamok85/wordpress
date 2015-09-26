@@ -41,7 +41,7 @@ class Reports extends Controller
 			
 		$this->columns = array(	
 		
-			'reportsTitle' 	=> __("Title",'Reports'),
+			'reports_titles' 	=> __("Title",'Reports'),
 			'reportsEdit'=>__('Edit','Reports'),
 			'reportsDelete'=>__('Trash','Reports')
 			
@@ -72,7 +72,7 @@ class Reports extends Controller
 		 //error_log($column,true);		
 		  switch ( $column ) {
 		  				
-		  	case "reportsTitle":  			
+		  	case "reports_titles":  			
 				$this->output_column_value($column, $post_id);						 
 		     break;
 			case 'reportsEdit':
@@ -105,6 +105,7 @@ class Reports extends Controller
 			$reports_field_list[$field_key]=$field_data;
 		}		
 		
+	//	debug($reports_field_list);
 		//error_log(print_r($fields,true));		
 		
 		

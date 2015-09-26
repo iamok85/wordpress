@@ -8,9 +8,6 @@ include 'lib/controllers/ReportsSearchPost.php';
 
 include 'lib/helper/CommonHelper.php';
 
-include 'lib/manager/BaseManager.php';
-include 'lib/manager/ReportsManager.php';
-
 include 'lib/factory/ReportAppFactory.php';
 
 
@@ -549,6 +546,8 @@ function my_scripts_method() {
 			'result'=>get_bloginfo('template_directory')."/js/result.js",
 			'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
 			'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
+			'foam'=>get_bloginfo('template_directory')."/js/foam/carrotsearch.foamtree.js",
+			
 			'google_api1'=>'http://maps.googleapis.com/maps/api/js?key=AIzaSyCfeQCllzZWaN8HcqP8QsxJp5UqGzPkWjg&sensor=false&libraries=places',
 			'google_api2'=>'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js'
 		);
@@ -571,17 +570,9 @@ function debug($value){
 	error_log(print_r($value,true));
 	error_log("\n");
 }
-function load_report(){
-	
-	
-	$content=get_post_meta(get_the_ID(),'reports_filters_groups');
-	$filters_groups_str=$content[0];
-	
-	$content=get_post_meta(get_the_ID(),'reports_options');
-	$options_str=$content[0];
+function load_report($filters_groups_str,$options_str){
 	
 	$options=json_decode(urldecode($options_str),true);
-
 		//error_log(print_r($options_str,true));
 	$report_url ='http://localhost/search_template.new/index.php/search/search_ajax?sid='.$options['view_type'].'&filters_groups='.$filters_groups_str.'&options='.$options_str;				
 	$curl = curl_init();

@@ -13,7 +13,7 @@ get_header('reports'); ?>
 		<div id="content" class="site-content" role="main">
 		
 		 <?
-			echo load_report();
+			//echo load_report();
 		 ?>
 			
 		</div><!-- #content -->

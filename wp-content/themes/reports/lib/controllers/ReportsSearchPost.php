@@ -15,6 +15,7 @@ class ReportsSearchPost extends SearchPost{
 	);
 	
 	private $default_field_list=array(
+									array('reports_titles'),
 									array('reports_filters_groups'),
 									array('reports_options')
 								);				
@@ -77,7 +78,47 @@ class ReportsSearchPost extends SearchPost{
 		$this->condition_groups=$condition_groups;							
 	}
 	
-	
+
+	public function allFilter(){
+						
+		//$conditions=$this->generalSearchCondition(array(array('p','=')),$ids);		
+				
+		$this->default_conditions=array(array(
+
+			array('post','post_status','=','publish'),
+		
+		
+		));
+		
+		//$conditions=$this->AndConditionOperator($this->default_conditions,$conditions);
+		
+		$this->default_options=array('order by'=>array('ID','DESC'),'limit'=>'0,1000');
+		
+		//$this->search_fields=array(array('ID'));
+			
+		
+		if(!isset($conditions_groups)){
+				
+			$conditions_groups=$this->default_conditions;
+		}
+		
+		if(!isset($field_list)){
+				
+			$field_list=$this->default_field_list;
+		}
+		
+		if(!isset($options)){
+				
+			$options=$this->default_options;
+		}			
+		
+		//debug($conditions);			
+		$this->condition_groups=$this->default_conditions;
+		
+		//$this->parseConditions($conditions);				
+		//error_log(print_r($conditions,true));			
+	}
+		
 	public function idFilter($ids=array()){
 						
 		$conditions=$this->generalSearchCondition(array(array('p','=')),$ids);		

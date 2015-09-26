@@ -6,6 +6,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Thirteen
+ * @subpackage Twenty_Thirteen
  * @since Twenty Thirteen 1.0
  */
 ?>
@@ -27,7 +28,7 @@
 		<?php endif; // is_single() ?>
 
 		<div class="entry-meta">
-			<?php twentythirteen_entry_meta(); ?>
+			<?php //twentythirteen_entry_meta(); ?>
 			<?php edit_post_link( __( 'Edit', 'twentythirteen' ), '<span class="edit-link">', '</span>' ); ?>
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->

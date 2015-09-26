@@ -27,7 +27,7 @@ class reports_entity extends entity
 	protected $field_for_name=array('reportsTitle');
 	
 	 var $field_list=array(
-	 		'reportsTitle'=>array('label'=>'Report Title','type'=>'text','post_type'=>'reports'),
+	 		'reports_titles'=>array('label'=>'Report Title','type'=>'text','post_type'=>'reports'),
 			'reports_filters_groups'=>array('label'=>'Filters Groups','type'=>'hidden','post_type'=>'reports'),
 			'reports_options'=>array('label'=>'Options','type'=>'hidden','post_type'=>'reports')			
 		);
