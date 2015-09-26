@@ -22,11 +22,12 @@ class reports_entity extends entity
 	private $reside;
 	private $status;
 	
-	protected $search_keyfield="reportsTitle";	
-	protected $field_for_title=array('reportsTitle');
-	protected $field_for_name=array('reportsTitle');
+	protected $search_keyfield="reports_titles";	
+	protected $field_for_title=array('reports_titles');
+	protected $field_for_name=array('reports_titles');
 	
 	 var $field_list=array(
+	 		
 	 		'reports_titles'=>array('label'=>'Report Title','type'=>'text','post_type'=>'reports'),
 			'reports_filters_groups'=>array('label'=>'Filters Groups','type'=>'hidden','post_type'=>'reports'),
 			'reports_options'=>array('label'=>'Options','type'=>'hidden','post_type'=>'reports')			

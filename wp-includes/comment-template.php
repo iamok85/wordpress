@@ -1145,10 +1145,14 @@ function wp_comment_form_unfiltered_html_nonce() {
  */
 function comments_template( $file = '/comments.php', $separate_comments = false ) {
 	global $wp_query, $withcomments, $post, $wpdb, $id, $comment, $user_login, $user_ID, $user_identity, $overridden_cpage;
-
+	
+	//debug(is_single());
+	//debug(is_page());
+	//debug($withcomments);
+	//debug(empty($post));
 	if ( !(is_single() || is_page() || $withcomments) || empty($post) )
 		return;
-
+	//debug('load comment');
 	if ( empty($file) )
 		$file = '/comments.php';
 
@@ -1225,7 +1229,9 @@ function comments_template( $file = '/comments.php', $separate_comments = false 
 	 *
 	 * @param string $theme_template The path to the theme template file.
 	 */
+	
 	$include = apply_filters( 'comments_template', $theme_template );
+	 //debug( $include );
 	if ( file_exists( $include ) )
 		require( $include );
 	elseif ( file_exists( TEMPLATEPATH . $file ) )
@@ -2216,7 +2222,7 @@ function wp_list_comments( $args = array(), $comments = null ) {
 function comment_form( $args = array(), $post_id = null ) {
 	if ( null === $post_id )
 		$post_id = get_the_ID();
-
+  
 	$commenter = wp_get_current_commenter();
 	$user = wp_get_current_user();
 	$user_identity = $user->exists() ? $user->display_name : '';
@@ -2270,6 +2276,7 @@ function comment_form( $args = array(), $post_id = null ) {
 		'format'               => 'xhtml',
 	);
 
+	//debug($defaults);
 	/**
 	 * Filter the comment form default arguments.
 	 *
@@ -2283,7 +2290,7 @@ function comment_form( $args = array(), $post_id = null ) {
 
 	// Ensure that the filtered args contain all required default values.
 	$args = array_merge( $defaults, $args );
-
+	
 		if ( comments_open( $post_id ) ) : ?>
 			<?php
 			/**

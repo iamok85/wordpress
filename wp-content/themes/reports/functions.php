@@ -543,13 +543,13 @@ function my_scripts_method() {
 			'data_graph'=> get_bloginfo('template_directory')."/js/data_graph.js",
 			'canvasjs'=>get_bloginfo('template_directory')."/js/canvasjs-1.6.0/canvasjs.min.js",
 			'bootstrap'=>get_bloginfo('template_directory')."/js/bootstrap.min.js",
-			'result'=>get_bloginfo('template_directory')."/js/result.js",
-			'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
-			'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
+			//'result'=>get_bloginfo('template_directory')."/js/result.js",
+			//'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
+			//'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
 			'foam'=>get_bloginfo('template_directory')."/js/foam/carrotsearch.foamtree.js",
 			
-			'google_api1'=>'http://maps.googleapis.com/maps/api/js?key=AIzaSyCfeQCllzZWaN8HcqP8QsxJp5UqGzPkWjg&sensor=false&libraries=places',
-			'google_api2'=>'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js'
+			//'google_api1'=>'http://maps.googleapis.com/maps/api/js?key=AIzaSyCfeQCllzZWaN8HcqP8QsxJp5UqGzPkWjg&sensor=false&libraries=places',
+			//'google_api2'=>'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js'
 		);
 	
 	foreach($_scripts as $handle=>$src){
@@ -564,6 +564,23 @@ function my_scripts_method() {
 }
 
 add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
+
+function theme_enqueue_styles() {
+
+	$_styles = array(
+			'bootstrap_style' => get_bloginfo('template_directory')."/css/bootstrap.min.css",
+			'jquery_ui_style'=>get_bloginfo('template_directory').'/css/jquery-ui-1.10.1.custom.min.css'
+		);
+	
+	foreach($_styles as $handle=>$src){		
+		wp_enqueue_style( $handle, $src );
+	}
+	
+   
+ 
+}
+add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
+
 function debug($value){
 
 	error_log("\n");

@@ -32,10 +32,10 @@ class Reports extends Controller
 				'_builtin' =>  false,
 				'capability_type' => 'page',
 				'hierarchical' => false,
-				'rewrite' => false,
+				'rewrite' => true,
 				'query_var' =>$this->name,
-				'supports' =>$this->supports ,
-				'show_in_menu'	=> false
+				'supports' =>array('page-attributes','comments','title'),
+				'show_in_menu'	=> true
 			
 			);	
 			

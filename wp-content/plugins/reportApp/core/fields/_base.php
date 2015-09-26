@@ -42,7 +42,7 @@ class reportApp_field
 		$this->add_filter('reportApp/update_field/type=' . $this->name, array($this, 'update_field'), 10, 2);
 		
 		//error_log('reportApp/create_field/type=' . $this->name."\n");
-		debug('Register: reportApp/create_field/type=' . $this->name);
+		//debug('Register: reportApp/create_field/type=' . $this->name);
 		$this->add_action('reportApp/create_field/type=' . $this->name, array($this, 'create_field'), 10, 1);
 		
 	}

@@ -5,12 +5,7 @@ class Controller
 
 	protected  $entity;
 	protected $scripts=array();
-	protected $supports=array(
-		'custom_fields',
-		'revisions',
-		'post-formats'
-	);
-
+	protected $post_setting=array();
 	function __construct()
 	{
 		$this->init();
@@ -26,24 +21,7 @@ class Controller
 		$path = apply_filters('reportApp/get_info', 'path');
 		$version = apply_filters('reportApp/get_info', 'version');
 
-		register_post_type(	$this->name, array(
-			'labels' => $this->labels,
-			'public' => true,
-			'show_ui' => true,
-			'_builtin' =>  false,
-			'capability_type' => 'page',
-			'hierarchical' => false,
-			'query_var' =>$this->name,
-			'supports' => array(
-				''
-				//'custom_fields',
-				//'revisions',
-				//'post-formats'
-				
-			),
-			'show_in_menu'	=> false
-			
-		));
+		register_post_type(	$this->name, $this->post_setting);
 
 		flush_rewrite_rules();
 

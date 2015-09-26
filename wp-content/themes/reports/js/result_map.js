@@ -61,7 +61,7 @@ function initialize(){
 				data_type_class=logic_field;							
 			}		
 			
-			jQuery('input.group_stats'+data_type_class).each(function(index){
+			jQuery('input.location_stats'+data_type_class).each(function(index){
 		
 				label=jQuery('input.label.'+index+data_type_class).val();					
 				geolocation=jQuery('input.geolocation.'+index+data_type_class).val();
@@ -112,7 +112,8 @@ function createMarker(latlng,text,link,compare_logic_field) {
       var pos = existingMarker.getPosition();
 
       if (latlng.equals(pos)) {
-        text = text + " & " + content[i];
+		if(typeof content!="undefined")
+			text = text + " & " + content[i];
       }                   
     }
   }

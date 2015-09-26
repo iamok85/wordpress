@@ -15,6 +15,7 @@ class ReportsSearchPost extends SearchPost{
 	);
 	
 	private $default_field_list=array(
+									array('ID'),
 									array('reports_titles'),
 									array('reports_filters_groups'),
 									array('reports_options')

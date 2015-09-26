@@ -199,8 +199,13 @@ function plugin_join($join) {
 			
 		
 		}	
-
-
+		// remove_action('save_post', array($this,'save_post'), 5, 2);
+// 		
+// 		
+ 		// wp_update_post( $post );
+// 		
+		// add_action('save_post', array($this, 'save_post'), 5, 2);	
+			
 	    if ( 'trash' !== $post->post_status ) //adjust the condition
 	    {
 	    	remove_action('save_post', array($this,'save_post'), 5, 2);

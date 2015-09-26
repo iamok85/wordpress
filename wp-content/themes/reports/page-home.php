@@ -18,11 +18,26 @@ get_header('reports');
  
  foreach($all_reports as $one_report){
 	//debug($one_report);
-	echo '<h1>'.(isset($one_report['reports_titles'])?$one_report['reports_titles']:"").'</h1>';
+	debug($one_report['reports_filters_groups']);
+	echo "<article>";
+	?>
+	<header class="entry-header">
+		
+		<h1 class="entry-title">
+			<a href="<?php echo get_permalink($one_report['ID'])?>" rel="bookmark"><?php echo (isset($one_report['reports_titles'])?$one_report['reports_titles']:"")?></a>
+		</h1>				
+	</header>
 	
-	$report_report=load_report($one_report['reports_filters_groups'],$one_report['reports_options']);
+	<?php
+	$report_report=load_report($one_report['reports_filters_groups'],$one_report['reports_options']);	?>
+	<div class="entry-content">
+		<?php echo $report_report;?>
+	</div>
+	<?php
+	echo "</article>";
 	
-	echo $report_report;
+	 //comments_template($one_report['ID']);
+		//get_template_part( 'content', get_post_format() );
  }
  
  get_footer('reports');

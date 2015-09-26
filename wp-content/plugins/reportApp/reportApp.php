@@ -57,7 +57,7 @@ class reportApp
     }
     
 	function create_field($field){
-		debug('reportApp/create_field/type='.$field['type']);
+		//debug('reportApp/create_field/type='.$field['type']);
 		do_action('reportApp/create_field/type='.$field['type'],$field);
 		
 	}
@@ -261,11 +261,16 @@ class reportApp
 
 	function reportApp_admin_scripts(){
 	
-        $scripts_handle=array_keys($this->_scripts);
-	    $styles_handle=array_keys($this->_styles);	   	
-		wp_enqueue_script($scripts_handle);				
-		wp_enqueue_style($styles_handle);
-						
+		if(is_admin()){
+				
+			$scripts_handle=array_keys($this->_scripts);
+		    $styles_handle=array_keys($this->_styles);	   	
+			wp_enqueue_script($scripts_handle);				
+			wp_enqueue_style($styles_handle);
+			
+				
+		}
+        				
 	}	
 
 
