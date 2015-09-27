@@ -9,8 +9,6 @@ jQuery(document).ready(function(){
 			filters_groups_str=reports_filters_groups;
 	}
 	
-
-	
 	if(typeof filters_groups_str=='undefined'){	
 		filters_groups_str=encodeURIComponent('[[{"customers_customerNumber":[]}]]');
 	}
@@ -28,6 +26,7 @@ jQuery(document).ready(function(){
 	}
 	//alert(options_str);
 	filters_groups=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(filters_groups_str)));																					
+	console.log(filters_groups);
 	options=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(options_str)));		
 	jQuery.search_options({options:options,instant_update:true});
 	jQuery('.filters_groups_container').html('');
@@ -35,9 +34,9 @@ jQuery(document).ready(function(){
 		filters=filters_groups[index];																
 		//console.log(filters);
 		url_list={};
-		url_list['get_autocomplete']='meta/get_autocomplete';
-		url_list['get_new_filter']='meta/get_new_filter';
-		url_list['get_options']='meta/get_options';				
+		url_list['get_autocomplete']='metajson/get_autocomplete';
+		url_list['get_new_filter']='metajson/get_new_filter';
+		url_list['get_options']='metajson/get_options';				
 		jQuery.filters({container:'.filters_groups_container',filters:filters,options:options,url_list:url_list});																	
 	});
 	
@@ -55,9 +54,9 @@ jQuery(document).ready(function(){
 				options=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(options_str)));				
 				//options=jQuery.parseJSON(options_str);	
 				url_list={};
-				url_list['get_autocomplete']='meta/get_autocomplete';
-				url_list['get_new_filter']='meta/get_new_filter';
-				url_list['get_options']='meta/get_options';			
+				url_list['get_autocomplete']='metajson/get_autocomplete';
+				url_list['get_new_filter']='metajson/get_new_filter';
+				url_list['get_options']='metajson/get_options';			
 				jQuery.filters({container:'.filters_groups_container',filters:[{name:''}],options:options,url_list:url_list});   			
 		});		
 	}

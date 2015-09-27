@@ -3,12 +3,14 @@
 (function($) {	
 		
 	data_list=[];
+	title_list=[];
 	$.draw_graph=function(arg){
 		opts=arg['graph_options'];
 		options=arg['options'];
 		diagram_type=opts['diagram_type'];
 		whole_data_list=opts['whole_data_list'];
-		title_list=opts['title'].split(':');
+		if(opts['title'])
+			title_list=opts['title'].split(':');
 		//console.log(whole_data_list);
 		data_list=[];
 		jQuery.each(whole_data_list,function(index){					
@@ -68,7 +70,7 @@
 					
 		
 		container=opts['container'];
-		console.log(data_list);
+		
 		var chart = new CanvasJS.Chart(container, {
 
 			title:{				

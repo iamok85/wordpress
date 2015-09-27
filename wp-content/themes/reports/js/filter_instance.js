@@ -248,8 +248,12 @@ $.fn.filter_seralize=function(cmd,arg){
 				type: "POST",
 				url: appWebRoot+url_list["get_new_filter"],
 				data: "params="+params,
+				dataType:'jsonp',
 				timeout: 90000,
-				success: function(data, textStatus ){           																	    						
+				success: function(data, textStatus ){  
+					
+					html_str=build_template(data);
+					
 					if(data!='field_invalid'&&jQuery.trim(data)!=""){																				    						
 						
 						classes=jQuery(data).filter('.field').attr('class').split(' ');																
@@ -257,7 +261,8 @@ $.fn.filter_seralize=function(cmd,arg){
 						filter_index=classes[1];						
 						filter_group=jQuery('.filters_groups_instance.'+filter_group_index)
 						this_filter_instance=filter_group.find('.filter_instance.'+filter_index+'.'+filter_group_index);																		
-						this_filter_instance.html(data);						
+						this_filter_instance.html(data);
+						
 						bindNewFilter(this_filter_instance);					
 						
 						filter_group.parent().css("height",'auto');									
@@ -303,6 +308,11 @@ $.fn.filter_seralize=function(cmd,arg){
 		});	
 			
 		
+		
+	}
+	function buildTemplate(data){
+	
+		console.log(data);
 		
 	}
 	function bindDeleteORFilter(){	

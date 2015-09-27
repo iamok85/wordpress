@@ -8,7 +8,7 @@
 	var options;
     var default_arg={};
 	var url_list={};
-	var appWebRoot='http://localhost/search_template.new/index.php/';
+	//var appWebRoot='http://localhost/search_template.new/index.php/';
 	$.filters=function(arg){			
         options=arg["options"];
 		url_list=arg["url_list"];
@@ -248,16 +248,20 @@ $.fn.filter_seralize=function(cmd,arg){
 				type: "POST",
 				url: appWebRoot+url_list["get_new_filter"],
 				data: "params="+params,
+				dataType: "jsonp",
 				timeout: 90000,
-				success: function(data, textStatus ){           																	    						
-					if(data!='field_invalid'&&jQuery.trim(data)!=""){																				    						
+				success: function(data, textStatus ){    
+					console.log(data);
+					html_str=build_template(data);
+					if(html_str!='field_invalid'&&jQuery.trim(html_str)!=""){																				    						
 						
-						classes=jQuery(data).filter('.field').attr('class').split(' ');																
-						filter_group_index=classes[2];
-						filter_index=classes[1];						
+						//classes=jQuery(html_str).filter('.field').attr('class').split(' ');	
+						
+						filter_group_index=data.filter_group_index;
+						filter_index=data.new_index;						
 						filter_group=jQuery('.filters_groups_instance.'+filter_group_index)
 						this_filter_instance=filter_group.find('.filter_instance.'+filter_index+'.'+filter_group_index);																		
-						this_filter_instance.html(data);						
+						this_filter_instance.html(html_str);						
 						bindNewFilter(this_filter_instance);					
 						
 						filter_group.parent().css("height",'auto');									
@@ -302,13 +306,135 @@ $.fn.filter_seralize=function(cmd,arg){
 					}					
 				},
 				error: function(xhr, textStatus, errorThrown){
-					 warning(xhr['responseText'],false);
+					 //warning(xhr['responseText'],false);
 				}
 		});	
 			
 		
 		
 	}
+	function build_template(data){
+	
+		//console.log(data);
+	html_str='';	
+	if(data.new_index!='filter0'){
+
+		html_str+='<div style="display:inline-block;background-color:lightgray;width:200px;">';
+			
+			html_str+='<div title="Click to delete this filter" style="cursor:pointer;width:20px;height:20px;" class="delete_filter '+data.new_index+' '+data.filter_group_index+'">';							
+			html_str+='</div>';
+			
+		html_str+='</div>';
+	}
+
+
+	html_str+='<div class="field '+data.new_index+' '+data.filter_group_index+'">';
+	search_fields_keys=Object.keys(data.search_fields);
+	html_str+='<select id="filter_by_field"  class="search_field filter_by_field '+data.new_index+' '+((data.default_field)?data.default_field:search_fields_keys[0])+'">';
+			
+			jQuery.map(data.search_fields,function(value,key){
+				
+				if(data.default_field){
+					if(key==data.default_field){
+						if(jQuery.isArray(data.search_fields[key])){					 					   
+							html_str+= '<option selected class="'+data.search_fields_types[key][0]+'" value="'+key+'">'+data.search_fields[key][0]+'</option>';
+						}else
+							html_str+= '<option selected class="'+data.search_fields_types[key][0]+'" value="'+key+'">'+data.search_fields[key]+'</option>';
+					}else{					
+						 if(jQuery.isArray(data.search_fields[key])){					 
+							
+							 html_str+= '<option class="'+data.search_fields_types[key][0]+'" value="'+key+'">'+data.search_fields[key][0]+'</option>';
+						}else
+							//debug($search_fields);die;
+							//debug($search_fields_types);die;
+							if(data.search_fields_types[key]){
+								
+								html_str+='<option class="'+data.search_fields_types[key][0]+'" value="'+key+'">'+data.search_fields[key]+'</option>';								
+							}
+							
+						}
+						
+							
+				
+				}else{
+				
+					 html_str+='<option class="'+data.search_fields_types[key][0]+'" value="'+key+'">'+data.search_fields[key]+'</option>';
+				}
+			});
+				
+	html_str+='</select>';
+	html_str+='</div>';
+
+	html_str+='<div class="value '+data.new_index+' '+data.filter_group_index+'">';    
+	 	 
+	 if(!data.default_field){
+		
+		search_fields_keys=Object.keys(data.search_fields);
+		key=search_fields_keys[0];
+		value="";
+	 }else{
+		key=data.default_field;
+		if(data.default_value){
+			value=urldecode(data.default_value);		
+		}
+			
+	 }	 	 
+	 //debug($search_fields_types[$key][0]);
+	 
+	 if(data.search_fields_types[key][0]){
+		   switch(data.search_fields_types[key][0]){
+		    
+			case "date":				
+			
+				 selector_options={"eq":"At",">":"After","<":"Before","be":"Between"};					
+				 html_str+='<select  class="date_link search_field filter_by_value '+data.new_index+'">';
+				 
+				 jQuery.map(selector_options,function(option_text,option_value){
+					
+						if(data.operator&&(option_value==data.operator))
+						
+							 html_str+='<option selected="selected" value="'+option_value+'">'+option_text+'</option>';				
+						else	
+							 html_str+='<option  value="'+option_value+'">'+option_text+'</option>';
+							
+				 });
+		
+				html_str+='</select>';
+				
+				if(data.operator&&data.operator=="be"){
+					html_str+= "<input type='text' class='search_field filter_by_value date datepicker1 "+data.new_index+"' value='"+((data.value1)?data.value1:"")+"'/> ";						
+					html_str+= "<input type='text' class='search_field filter_by_value date datepicker2 "+data.new_index+"' value='"+((data.value2)?data.value2:"")+"'/> ";						
+				}else{
+					html_str+= "<input type='text' class='search_field filter_by_value date datepicker1 "+data.new_index+"' value='"+((data.value)?data.value:"")+"'/> ";						
+				}				
+				break;
+			
+				
+			case 'time_frame':				
+			
+				html_str+=  "<input type='text' class='search_field filter_by_value time_frame "+data.new_index+"' value='"+((data.value)?data.value:"")+"'>";
+				
+				selector_options={"days":"Days","weeks":"Weeks","months":"Months"};					
+				html_str+= '<select class="time_unit '+data.new_index+' search_field filter_by_value">';
+
+				jQuery.map(selector_options,function(text,key){
+				
+					if(data.time_unit==key)
+						html_str+= '<option selected value="'+key+'">'+text+'</option>';				
+					else	
+						html_str+='<option  value="'+key+'">'+text+'</option>';				
+				
+				});
+		
+				html_str+= '</select>';
+				break;
+		   }
+	  }
+	  
+		html_str+="</div>";
+		return html_str;
+	}
+	
 	function bindDeleteORFilter(){	
 		delete_filter_button=this_group.find('.delete_or_filter');
 		delete_filter_button.unbind('click');
@@ -383,7 +509,7 @@ $.fn.filter_seralize=function(cmd,arg){
 		   
 			classes=jQuery(this).attr("class").split(" ");
 			filter_index=classes[2];
-			////alert(filter_index);
+			//alert(jQuery(this).attr("class"));
 			jQuery('div.'+filter_index+'.value').html('');
 			bindInstance(jQuery(this),"");
 			
@@ -457,7 +583,7 @@ $.fn.filter_seralize=function(cmd,arg){
 						width: 'resolve',
 						ajax: {
 						  url: appWebRoot+url_list["get_options"]+"?field_name="+field_name+"&filter_index="+filter_index+"&filters_groups_index="+this_filter_group_index,
-						  dataType: 'json',	
+						  dataType: 'jsonp',	
 						  method:'POST',			  
 						  data: function (param) {
 							

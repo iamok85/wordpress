@@ -543,9 +543,9 @@ function my_scripts_method() {
 			'data_graph'=> get_bloginfo('template_directory')."/js/data_graph.js",
 			'canvasjs'=>get_bloginfo('template_directory')."/js/canvasjs-1.6.0/canvasjs.min.js",
 			'bootstrap'=>get_bloginfo('template_directory')."/js/bootstrap.min.js",
-			//'result'=>get_bloginfo('template_directory')."/js/result.js",
-			//'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
-			//'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
+			'result'=>get_bloginfo('template_directory')."/js/result.js",
+			'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
+			'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
 			'foam'=>get_bloginfo('template_directory')."/js/foam/carrotsearch.foamtree.js",
 			
 			//'google_api1'=>'http://maps.googleapis.com/maps/api/js?key=AIzaSyCfeQCllzZWaN8HcqP8QsxJp5UqGzPkWjg&sensor=false&libraries=places',
@@ -589,11 +589,14 @@ function debug($value){
 }
 function load_report($filters_groups_str,$options_str){
 	
+	
 	$options=json_decode(urldecode($options_str),true);
 		//error_log(print_r($options_str,true));
-	$report_url ='http://localhost/search_template.new/index.php/search/search_ajax?sid='.$options['view_type'].'&filters_groups='.$filters_groups_str.'&options='.$options_str;				
+	$report_url ='http://local.reportapp.com:8080/index.php/search/search_ajax?sid='.$options['view_type'].'&filters_groups='.$filters_groups_str.'&options='.$options_str;				
 	$curl = curl_init();
+    
 	curl_setopt_array($curl, array(	
+	
 		CURLOPT_RETURNTRANSFER => 1, //specify that we want to return the response so we can store it in a variable
 		CURLOPT_HTTPHEADER => array("Content-type:text/html"), //header type
 		CURLOPT_URL => $report_url,
@@ -603,7 +606,7 @@ function load_report($filters_groups_str,$options_str){
 	$report_response = curl_exec($curl);
 
 	curl_close($curl);
-				
+	//debug($report_response);			
 	return $report_response;
 }
 

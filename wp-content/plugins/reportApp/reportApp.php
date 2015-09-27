@@ -212,8 +212,9 @@ class reportApp
 			'show_in_menu'	=> false,
 		));
 		
-							
-		
+		echo '<script>';	
+		echo  'appWebRoot="http://local.reportapp.com:8080/index.php/";';				
+		echo  '</script>';
 		$this->_scripts = array(
 			'jquery-1.7.1' => $this->_settings['dir'] . "js/jquery-1.7.1.min.js",
 			'jquery-ui-1.10.1' => $this->_settings['dir'].'js/jquery-ui-1.10.1.custom.min.js',

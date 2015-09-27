@@ -21,7 +21,7 @@ jQuery(document).ready(function($){
 		
 		/*get search option*/
 		get_options=function(){		
-			optionsStr=jQuery('.search_display_options').serialized_options();								
+		optionsStr=jQuery('.search_display_options').serialized_options();								
 			
 			return optionsStr;
 		};

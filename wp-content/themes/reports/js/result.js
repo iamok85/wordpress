@@ -170,14 +170,15 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 	
 	construct_graph_data=function(options){
 		whole_data_list=[];
-		all_label=[];
+		
 		all_diagram_type=[];
 		all_data_type_class=[];
 		all_logic_field=[];
 		all_title=[];
-		
-		jQuery('div.statistics_store').each(function(whole_index){			
+		all_label=[];
+		jQuery('div.statistics_store.'+options['view_type']).each(function(whole_index){			
 			dataPoints_list=[];
+			
 			classes=jQuery(this).attr('class').split(" ");								
 			if(classes[1]!=undefined){
 				logic_field=classes[1];
@@ -188,12 +189,13 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 			}	
 			all_logic_field[whole_index]=logic_field;
 			all_data_type_class[whole_index]=data_type_class;			
-			title=jQuery('input.graph_title'+data_type_class).val();					
+			title=jQuery('input.graph_title'+data_type_class+"."+options['view_type']).val();					
 			all_title[whole_index]=title;			
 			whole_title+=title+':';								
-						
-			jQuery('input.group_stats'+data_type_class).each(function(index){
-				label=jQuery('input.label.'+index+data_type_class).val();					
+			
+			
+			jQuery('input.group_stats'+data_type_class+"."+options['view_type']).each(function(index){
+				label=jQuery('input.label.'+index+data_type_class+"."+options['view_type']).val();					
 				if(jQuery.inArray(label,all_label)==-1){
 					all_label[all_label.length]=label;									
 				}
@@ -218,6 +220,7 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 				all_diagram_type[whole_index]='spline';
 			}
 			whole_data_list[whole_index]=dataPoints_list;
+			//alert(whole_index);
 		});	
 		return_data={"all_title":all_title,"all_logic_field":all_logic_field,"all_data_type_class":all_data_type_class,"whole_title":whole_title,"whole_data_list":whole_data_list,"all_diagram_type":all_diagram_type,"all_label":all_label};		
 		return return_data;
@@ -226,7 +229,7 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 	draw_data_diagram=function(){		
 			
 			var optionsStr =jQuery('input.options_str').val();			
-			options=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(optionsStr)))									;
+			options=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(optionsStr)));
 			whole_data_list=[];
 			whole_title="";
 			graph_count=0;																
@@ -236,6 +239,7 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 			whole_data_list=return_data["whole_data_list"];
 			all_diagram_type=return_data["all_diagram_type"];
 			all_label=return_data["all_label"];
+			//console.log(all_label);
 			whole_title=return_data["whole_title"];
 			all_data_type_class=return_data["all_data_type_class"];
 			all_logic_field=return_data["all_logic_field"];
@@ -274,9 +278,9 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 			graph_options['whole_data_list']=whole_data_list;							
 			graph_options['diagram_type']=diagram_type;			
 			if(chart_type!="")
-				graph_options['container']="chartContainer_"+chart_type;
+				graph_options['container']="chartContainer_"+chart_type+"_"+options['view_type'];
 			else	
-				graph_options['container']="chartContainer";			
+				graph_options['container']="chartContainer_"+options['view_type'];			
 			graph_options['title']=title;
 			
 			if(whole_data_list.length>0)
@@ -285,9 +289,46 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 			jQuery('.canvasjs-chart-credit').hide();
 		}
 	})(jQuery);		
-
+		
+		function build_template(data){
+			html_str="<table>";
+			
+			jQuery(data.data).each(function(index){
+				html_str+="<tr>";
+				
+				jQuery.map(data.headers,function(value,key){
+					
+					html_str+="<td>"+data.data[index][data.header_field_mapping[key]]+"</td>";					
+				});
+					
+				html_str+="</tr>";				
+			});	
+			html_str+="</table>";
+			return html_str;
+		}
 		active_tab_index=jQuery('input.active_tab_index').val();		
 		jQuery('.group_by_tabs').tabs({hide: { effect: "none", duration: 1000 } ,selected:active_tab_index, async: true,
+		 beforeLoad: function (event, ui) {
+				//alert(ui.ajaxSettings.url);
+				parts=appWebRoot.split('index.php');
+				
+				webRoot=parts[0].slice(0,-1);
+                var url = webRoot+ui.ajaxSettings.url+"&json=true";
+				
+           
+				jQuery.ajax({
+					type: "GET",
+					url: url,
+					
+					dataType: "jsonp",
+					timeout: 90000,
+					success: function(data, textStatus ){ 
+						html_str=build_template(data);
+						jQuery('.ui-tabs-panel:visible').html(html_str);
+					}
+				});
+                return false;
+            },
 		  beforeActivate: function(event, ui){
 			//jQuery.blockUI({messageText:'Loading Data'});
 		},

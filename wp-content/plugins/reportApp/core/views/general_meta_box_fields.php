@@ -1,6 +1,3 @@
-<script>
-	var appWebRoot='http://localhost/search_template.new/index.php/';
-</script>	
 
 
 

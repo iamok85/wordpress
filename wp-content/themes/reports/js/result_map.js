@@ -1,5 +1,7 @@
 jQuery(document).ready(function(){
-
+if(typeof google=="undefined"){
+	return;
+}
 var loc; //this will store information about the current base location selected by the user
 var markers_array = []; //this will store an array of the markers that were created
 var directionsDisplay;

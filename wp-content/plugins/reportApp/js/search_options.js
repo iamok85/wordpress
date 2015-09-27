@@ -1,6 +1,6 @@
 (function($) {	
 	
-	var url="meta/set_search_options";			
+	var url="metajson/set_search_options";			
 	var params=[];
 	var options_str="";
 	var options={};
@@ -121,38 +121,29 @@
 		jQuery.ajax({
 				type: "POST",
 				url: appWebRoot+url,
+				dataType: "jsonp",
+				jsonpCallback: 'callback',
 				data: "options_str="+optionsStr,
 				timeout: 90000,
 				success: function(data, textStatus ){           																	    
 					//alert(1);
-					sid=options['view_type'];
-					jQuery('#search_display_options').html(data);
-					select2_list_by=initialize_list_by(sid);				
-				    selectedValues=[];				    
-					other_options=select2_list_by.find('option');
-					jQuery(other_options).each(function(index){					
+					html_str=build_template(data);	
+					//console.log(html_str);
+					jQuery('#search_display_options').html(html_str);
+					sid=data.options.view_type;
+					select2_list_by=initialize_list_by(sid);
+					selectedValues=[];				    
+					options=select2_list_by.find('option');
+					jQuery(options).each(function(index){					
 						selectedValues[index]=jQuery(this).val();
 					});
-					//select2_list_by.select2('val',selectedValues);																
-					select2_compare_with=initialize_compare_with(sid);					
+					select2_compare_with=initialize_compare_with(sid);
 					selectedValues=[];
-					other_options=select2_compare_with.find('option');
-					jQuery(other_options).each(function(index){					
+					options=select2_compare_with.find('option');
+					jQuery(options).each(function(index){					
 						selectedValues[index]=jQuery(this).val();
 					});
 					select2_compare_with.select2('val',selectedValues);
-			  
-					render_type=jQuery('select.render_type').val();
-					/*if(render_type=="graph")
-						rebuild_compare_option_section(selectedValues);
-					*/	
-					selectedValues=[];
-					other_options=select2_list_by.find('option');
-					jQuery(other_options).each(function(index){					
-						selectedValues[index]=jQuery(this).val();
-					});			  
-					select2_list_by.select2('val',selectedValues);					
-					jQuery('#add_or_filter').show();	
 				},
 				
 				error: function(xhr, textStatus, errorThrown){
@@ -160,7 +151,204 @@
 				}
 		});		
 	}
-							
+		
+	function build_template(data){
+		
+		html_str='';
+		html_str+='<h4 class="field-label">Display Options</h4>';		
+		html_str+='<div class="option_unit controls">';
+		
+		html_str+='<label class="control-label" for="inputListResultsBy"><strong>Group by</strong></label>';
+		html_str+='<div >';
+						
+		html_str+='<select class="list_by search_options"  name="list_by" style="width: 230px;" >';
+			
+			if(data.options.list_by){
+				 
+				jQuery(data.options.list_by).each(function(index,list_by){
+				
+					html_str+='<option value="'+list_by+'">'+data.listby_options[list_by]+'</option>';
+				});				
+			}
+			 
+		html_str+='</select>';
+		html_str+='</div>';
+		html_str+='</div>';
+		
+		
+		html_str+='<div class="option_unit controls" >';
+		html_str+='<label class="control-label" ><strong>View Detail of</strong></label>';
+		html_str+='<div class="controls">';
+			
+		html_str+='<select class="compare_with search_options"  name="compare_with" style="width: 230px;" >';
+			
+			    if(data.options.compare_with){
+					
+					jQuery(data.options.compare_with).each(function(index,compare_field){
+						
+						html_str+='<option value="'+compare_field.logic_field+'">'+data.comparewith_options[compare_field.logic_field]+'</option>';
+					});
+					  	
+				}										
+				 
+		html_str+='</select>';
+		html_str+='</div>';
+		html_str+='</div>'
+		
+		html_str+='<div class="option_unit_render_type controls" data-original-title="" title="" >';
+		
+		html_str+='<label class="control-label" for="pagination"><strong>Render Type</strong></label>';
+					
+		if(!data.options.render_type){
+			
+			data.options.render_type="table";
+		}
+		
+		html_str+='<select style="width: 230px;" id="render_type" class="search_options render_type width-auto margin-zero" name="render_type" data-original-title="" title="">';
+		html_str+='<option '+((data.options.render_type=="graph")? "selected":"")+' value="graph">Graph</option>';
+		html_str+='<option '+((data.options.render_type=="table")? "selected":"")+'  value="table">Table</option>';
+		html_str+='<option '+((data.options.render_type=="cluster")? "selected":"")+' value="cluster">Cluster</option>';
+		html_str+='<option '+((data.options.render_type=="map")? "selected":"")+' value="map">Map</option>';
+		html_str+='</select>';
+		html_str+='</div>';
+		
+		html_str+='<div class="option_unit controls">';
+		html_str+='<label class="control-label" for="inputOrderResultsBy"><strong>Order by</strong></label>';
+		html_str+='<div>';
+			
+			
+		html_str+='<select name="order_by" class="search_options order_by " style="width:130px;" title="Order the search result by one of these fields">';
+		
+		html_str+='<option></option>';
+		//console.log(data.orderby_options[data.options.view_type]);
+		jQuery.map(data.orderby_options[data.options.view_type],function(value, key){
+		
+				
+				if(data.options.order_by&&key==data.options.order_by) {
+				
+					html_str+='<option value="'+key+'" selected>'+value+'</option>';
+					
+				}else{
+				
+					html_str+='<option value="'+key+'">'+value+'</option>';
+				}	
+									
+		}); 
+		html_str+='</select>';
+		html_str+='</div>';
+		html_str+='</div>';
+	
+	
+		html_str+='<div class="option_unit controls">';
+		order_seq_options={'':'','asc':'Ascend','desc':'Descend'};
+		html_str+='<select name="order_by_seq" class="search_options order_by_seq " style="width:90px;" title="Order Ascendantly or Descendantly">';
+			
+		jQuery.map(order_seq_options,function(value, key){
+			
+			if(data.options.order_by_seq&&key==data.options.order_by_seq) {
+			
+				html_str+='<option value="'+key+'" selected>'+value+'</option>';
+				
+			}else{
+			
+				html_str+='<option value="'+key+'">'+value+'</option>';
+				
+			}
+			
+		});
+		html_str+='</select>';
+		html_str+='</div>';
+	
+		
+		
+		display="";
+		if(data.options.render_type=='graph'){
+			display="display:none";
+		}
+		
+		html_str+='<div style="'+display+'" class="option_unit controls" data-original-title="" title="" >';
+		
+		html_str+='<label class="control-label" for="pagination"><strong>Results Per Page</strong></label>';
+
+		html_str+='<select style="width:70px" id="pagination" class="search_options pagination width-auto margin-zero" name="pagination" data-original-title="" title="">';
+		
+		pagination_type=[20,40,60];
+		
+		jQuery(pagination_type).each(function(index,value){
+		
+			if(data.options.pagination==value){
+			
+				html_str+='<option selected="selected" value="'+value+'">'+value+'</option>';
+			}else{
+				html_str+='<option value="'+value+'">'+value+'</option>';
+			}
+
+		});
+	html_str+='</select>';
+	html_str+='</div><br/>';
+	
+	html_str+='<div class="option_unit_show_sql_only controls" data-original-title="" title="" >';
+	html_str+='<label class="control-label" for="pagination"><strong>Show SQL Only</strong></label>';
+	
+	if(data.options.show_sql_only){
+	
+		html_str+='<input type="checkbox" id="show_sql_only" checked class="search_options show_sql_only width-auto margin-zero" name="show_sql_only" data-original-title="" title="">';
+	}else{
+		
+		html_str+='<input type="checkbox" id="show_sql_only" class="search_options show_sql_only width-auto margin-zero" name="show_sql_only" data-original-title="" title="">';
+	}
+	
+	html_str+='</div>';
+
+	html_str+='<div class="option_unit_user_sub_query controls" data-original-title="" title="" >';
+	html_str+='<label class="control-label" for="pagination"><strong>Use Sub query</strong></label>';
+	if(data.options.use_sub_query){
+		
+		html_str+='<input type="checkbox" id="use_sub_query" checked class="search_options use_sub_query width-auto margin-zero" name="use_sub_query" data-original-title="" title="">';
+		
+	}else{
+		
+		html_str+='<input type="checkbox" id="use_sub_query" class="search_options use_sub_query width-auto margin-zero" name="use_sub_query" data-original-title="" title="">';
+	}		
+	html_str+='</div>';
+
+
+	if(data.options.render_type=='graph'){
+
+		if((data.options.compare_with)&&data.options.compare_with.length>1){
+			
+			html_str+='<div class="option_unit controls" data-original-title="" title="" >';
+			
+			html_str+='<label class="control-label"><strong>Combine Diagrams<strong></label>';
+				
+				if(isset(data.options.combine)){
+					html_str+='<input type="checkbox" id="combine" checked class="search_options combine width-auto margin-zero" name="combine" data-original-title="" title=""/>';
+				}else{		
+					html_str+='<input type="checkbox" id="combine" class="search_options combine width-auto margin-zero" name="combine" data-original-title="" title=""/>';
+				}		
+			html_str+='</div>';
+			
+		}else{
+			
+			html_str+='<div style="display:none" class="option_unit controls" data-original-title="" title="" >';
+			html_str+='<label class="control-label"><strong>Combine Diagrams<strong></label>';
+			html_str+='<input type="checkbox" id="combine" class="search_options combine width-auto margin-zero" name="combine" data-original-title="" title=""/>';
+			html_str+='</div>';
+		
+		}
+	}else{
+
+		html_str+='<div style="display:none" class="option_unit controls" data-original-title="" title="" >	';
+		html_str+='<label class="control-label"><strong>Combine Diagrams<strong></label>';
+		html_str+='<input type="checkbox" id="combine" class="search_options combine width-auto margin-zero" name="combine" data-original-title="" title=""/>';
+		html_str+='</div>';
+	}					
+		html_str+='<div class="option_unit" data-original-title="" title="" >';
+		html_str+='<input type="hidden" value="'+data.options.view_type+'" name="view_type" class="search_options view_type" />';
+		html_str+='</div>';		
+		return html_str;
+		
+	}	
 		
 	function initialize_compare_with(sid){
 	
@@ -170,8 +358,8 @@
 			multiple: true,
 			width: 'resolve',
 			ajax: {
-			  url: appWebRoot+"meta/get_autocomplete?sid="+sid+"&field_name=search_compare_with&format=json&view_type="+sid,
-			  dataType: 'json',								  
+			  url: appWebRoot+"metajson/get_autocomplete?sid="+sid+"&field_name=search_compare_with&format=json&view_type="+sid,
+			  dataType: 'jsonp',								  
 			  data: function (term, page) {
 				return {
 				  q: term
@@ -244,8 +432,8 @@
 			multiple: true,
 			width: 'resolve',
 			ajax: {
-			  url: appWebRoot+"meta/get_autocomplete?sid="+sid+"&field_name=search_list_by&format=json&view_type="+sid,
-			  dataType: 'json',
+			  url: appWebRoot+"metajson/get_autocomplete?sid="+sid+"&field_name=search_list_by&format=json&view_type="+sid,
+			  dataType: 'jsonp',
 			  
 			  data: function (term, page) {
 				return {
@@ -347,7 +535,7 @@
 		});
 	
 		jQuery('.search_options').live('change',function(){													
-			setting_check(jQuery(this));			
+			//setting_check(jQuery(this));			
 		});	
 
 
