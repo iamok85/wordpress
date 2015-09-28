@@ -21,7 +21,7 @@ jQuery(document).ready(function(){
 	}
 	//alert(filters_groups_str);
 	if(typeof options_str =='undefined'){	
-		options_str='{"list_by"%3A%5B"makeup_Customer_Address"%5D%2C"group_by_field_value"%3A"Total"%2C"view_type"%3A"557e71b1719f9"%2C"pagination"%3A"20"%2C"order_by"%3A"products_productName"%2C"order_by_seq"%3A"desc"%2C"show_sql_only"%3A"0"%2C"render_type"%3A"map"%2C"combine"%3A"0"%2C"compare_with"%3A%5B%7B"logic_field"%3A"products_productName"%2C"compare_function"%3A%7B"function_name"%3A"count"%2C"diagram_type"%3A"bar"%7D%7D%5D}';
+		options_str='{"list_by"%3A%5B"products_productName"%5D%2C"group_by_field_value"%3A"Total"%2C"view_type"%3A"55cca65a21eea"%2C"pagination"%3A"20"%2C"order_by"%3A"orders_orderNumber"%2C"order_by_seq"%3A"desc"%2C"show_sql_only"%3A"0"%2C"render_type"%3A"map"%2C"combine"%3A"0"%2C"compare_with"%3A%5B%7B"logic_field"%3A"makeup_Customer_Address"%2C"compare_function"%3A%7B"function_name"%3A"count"%2C"diagram_type"%3A"bar"%7D%7D%5D}';
 		options_str=encodeURIComponent(options_str);
 	}
 	//alert(options_str);
