@@ -1,6 +1,6 @@
 (function($) {	
 	
-	var url="metajson/set_search_options";			
+	var url="metaJson/set_search_options";			
 	var params=[];
 	var options_str="";
 	var options={};
@@ -358,7 +358,7 @@
 			multiple: true,
 			width: 'resolve',
 			ajax: {
-			  url: appWebRoot+"metajson/get_autocomplete?sid="+sid+"&field_name=search_compare_with&format=json&view_type="+sid,
+			  url: appWebRoot+"metaJson/get_autocomplete?sid="+sid+"&field_name=search_compare_with&format=json&view_type="+sid,
 			  dataType: 'jsonp',								  
 			  data: function (term, page) {
 				return {
@@ -432,7 +432,7 @@
 			multiple: true,
 			width: 'resolve',
 			ajax: {
-			  url: appWebRoot+"metajson/get_autocomplete?sid="+sid+"&field_name=search_list_by&format=json&view_type="+sid,
+			  url: appWebRoot+"metaJson/get_autocomplete?sid="+sid+"&field_name=search_list_by&format=json&view_type="+sid,
 			  dataType: 'jsonp',
 			  
 			  data: function (term, page) {
