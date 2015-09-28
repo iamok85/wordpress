@@ -24,7 +24,7 @@ get_header('reports');
 	<header class="entry-header">
 		
 		<h1 class="entry-title">
-			<a href="<?php echo get_permalink($one_report['ID'])?>" rel="bookmark"><?php echo (isset($one_report['reports_titles'])?$one_report['reports_titles']:"")?></a>
+			<a href="<?php echo get_permalink($one_report['ID'])?>" rel="bookmark"><?php echo (isset($one_report['reports_titles'])?$one_report['reports_titles']:"")?><font size="3">></font></a>
 		</h1>				
 	</header>
 	

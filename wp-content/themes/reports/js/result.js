@@ -310,24 +310,28 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 		jQuery('.group_by_tabs').tabs({hide: { effect: "none", duration: 1000 } ,selected:active_tab_index, async: true,
 		 beforeLoad: function (event, ui) {
 				//alert(ui.ajaxSettings.url);
-				parts=appWebRoot.split('index.php');
-				
-				webRoot=parts[0].slice(0,-1);
-                var url = webRoot+ui.ajaxSettings.url+"&json=true";
-				
-           
-				jQuery.ajax({
-					type: "GET",
-					url: url,
+				if(jQuery('#masthead').length>0){
+					parts=appWebRoot.split('index.php');
 					
-					dataType: "jsonp",
-					timeout: 90000,
-					success: function(data, textStatus ){ 
-						html_str=build_template(data);
-						jQuery('.ui-tabs-panel:visible').html(html_str);
-					}
-				});
-                return false;
+					webRoot=parts[0].slice(0,-1);
+					var url = webRoot+ui.ajaxSettings.url+"&json=true";
+					
+					
+					jQuery.ajax({
+						type: "GET",
+						url: url,
+						
+						dataType: "jsonp",
+						timeout: 90000,
+						success: function(data, textStatus ){ 
+							html_str=build_template(data);
+							jQuery('.ui-tabs-panel:visible').html(html_str);
+						}
+					});
+					return false;
+				}else{
+					return true;
+				}
             },
 		  beforeActivate: function(event, ui){
 			//jQuery.blockUI({messageText:'Loading Data'});
