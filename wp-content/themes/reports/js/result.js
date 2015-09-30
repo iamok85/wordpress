@@ -231,7 +231,7 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 	
 	draw_data_diagram=function(report_id){		
 			
-			var optionsStr =jQuery('input.options_str').val();			
+			var optionsStr =jQuery('input.options_str.'+report_id).val();			
 			options=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(optionsStr)));
 			whole_data_list=[];
 			whole_title="";
@@ -268,13 +268,14 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 				jQuery('div.chartContainer').css('height',100+20*all_label.length*whole_data_list.length);													
 				whole_data_list=reconstruct_data_list(whole_data_list,all_label);
 				//console.log(whole_data_list);
+				
 				draw_graph('',whole_title,whole_data_list,'spline');
 			}	   
 			
 		}
 		
 		function draw_graph(chart_type,title,whole_data_list,diagram_type){	
-			var optionsStr =jQuery('input.options_str').val();			
+			var optionsStr =jQuery('input.options_str.'+report_id).val();			
 			options=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(optionsStr)));
 			
 			graph_options={};						

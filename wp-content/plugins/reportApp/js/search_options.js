@@ -321,7 +321,7 @@
 			
 			html_str+='<label class="control-label"><strong>Combine Diagrams<strong></label>';
 				
-				if(isset(data.options.combine)){
+				if(data.options.combine){
 					html_str+='<input type="checkbox" id="combine" checked class="search_options combine width-auto margin-zero" name="combine" data-original-title="" title=""/>';
 				}else{		
 					html_str+='<input type="checkbox" id="combine" class="search_options combine width-auto margin-zero" name="combine" data-original-title="" title=""/>';
