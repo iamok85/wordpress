@@ -544,12 +544,13 @@ function my_scripts_method() {
 			'canvasjs'=>get_bloginfo('template_directory')."/js/canvasjs-1.6.0/canvasjs.min.js",
 			'bootstrap'=>get_bloginfo('template_directory')."/js/bootstrap.min.js",
 			'result'=>get_bloginfo('template_directory')."/js/result.js",
+			'google_api1'=>'http://maps.googleapis.com/maps/api/js?key=AIzaSyCfeQCllzZWaN8HcqP8QsxJp5UqGzPkWjg&sensor=false&libraries=places',
+			'google_api2'=>'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js',
 			'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
 			'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
 			'foam'=>get_bloginfo('template_directory')."/js/foam/carrotsearch.foamtree.js",
 			
-			//'google_api1'=>'http://maps.googleapis.com/maps/api/js?key=AIzaSyCfeQCllzZWaN8HcqP8QsxJp5UqGzPkWjg&sensor=false&libraries=places',
-			//'google_api2'=>'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js'
+			
 		);
 	
 	foreach($_scripts as $handle=>$src){
@@ -592,9 +593,9 @@ function load_report($filters_groups_str,$options_str){
 	
 	$options=json_decode(urldecode($options_str),true);
 		//error_log(print_r($options_str,true));
-	$report_url ='http://local.reportapp.com:8080/index.php/search/search_ajax?sid='.$options['view_type'].'&filters_groups='.$filters_groups_str.'&options='.$options_str;				
-	$curl = curl_init();
-    
+	$report_url =API_URL.'?sid='.$options['view_type'].'&filters_groups='.$filters_groups_str.'&options='.$options_str.'&output=json';				
+	//debug($report_url);
+	$curl = curl_init();    
 	curl_setopt_array($curl, array(	
 	
 		CURLOPT_RETURNTRANSFER => 1, //specify that we want to return the response so we can store it in a variable
@@ -604,9 +605,13 @@ function load_report($filters_groups_str,$options_str){
 	));
  
 	$report_response = curl_exec($curl);
-
+	//debug($report_response);
+    $report_response =json_decode($report_response,true);
+	
 	curl_close($curl);
-	//debug($report_response);			
+	
+	//debug($report_response);
+	
 	return $report_response;
 }
 

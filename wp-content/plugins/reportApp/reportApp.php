@@ -213,7 +213,7 @@ class reportApp
 		));
 		
 		echo '<script>';	
-		echo  'appWebRoot="http://local.reportapp.com:8080/index.php/";';				
+		echo  'appWebRoot="'.API_URL_HOME.'/";';				
 		echo  '</script>';
 		$this->_scripts = array(
 			'jquery-1.7.1' => $this->_settings['dir'] . "js/jquery-1.7.1.min.js",
@@ -221,7 +221,6 @@ class reportApp
 			'jquery.blockUI' =>$this->_settings['dir'] . "js/jquery.blockUI.js",
 			'filter_instance'=> $this->_settings['dir'] . "js/filter_instance.js",
 			'filters'=> $this->_settings['dir'] . "js/filters.js",
-			'canvasjs'=>$this->_settings['dir'] . "js/canvasjs-1.6.0/canvasjs.min.js",
 			'bootstrap'=>$this->_settings['dir'] ."js/bootstrap.min.js",
 			'select2'=>$this->_settings['dir'] ."js/select2-4/select2.js",
 			'reportApp'=>$this->_settings['dir'] ."js/reportApp.js",

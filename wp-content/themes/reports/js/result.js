@@ -168,7 +168,9 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 		return new_whole_data_list;
 	}
 	
-	construct_graph_data=function(options){
+	construct_graph_data=function(options,report_id){
+	
+
 		whole_data_list=[];
 		
 		all_diagram_type=[];
@@ -176,10 +178,11 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 		all_logic_field=[];
 		all_title=[];
 		all_label=[];
-		jQuery('div.statistics_store.'+options['view_type']).each(function(whole_index){			
+		jQuery('div.statistics_store.'+report_id).each(function(whole_index){			
 			dataPoints_list=[];
 			
-			classes=jQuery(this).attr('class').split(" ");								
+			classes=jQuery(this).attr('class').split(" ");	
+			//report_id=classes[2];
 			if(classes[1]!=undefined){
 				logic_field=classes[1];
 				data_type_class='.'+logic_field;
@@ -189,13 +192,13 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 			}	
 			all_logic_field[whole_index]=logic_field;
 			all_data_type_class[whole_index]=data_type_class;			
-			title=jQuery('input.graph_title'+data_type_class+"."+options['view_type']).val();					
+			title=jQuery('input.graph_title'+data_type_class+"."+report_id).val();					
 			all_title[whole_index]=title;			
 			whole_title+=title+':';								
 			
 			
-			jQuery('input.group_stats'+data_type_class+"."+options['view_type']).each(function(index){
-				label=jQuery('input.label.'+index+data_type_class+"."+options['view_type']).val();					
+			jQuery('input.group_stats'+data_type_class+"."+report_id).each(function(index){
+				label=jQuery('input.label.'+index+data_type_class+"."+report_id).val();					
 				if(jQuery.inArray(label,all_label)==-1){
 					all_label[all_label.length]=label;									
 				}
@@ -226,7 +229,7 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 		return return_data;
 	}
 	
-	draw_data_diagram=function(){		
+	draw_data_diagram=function(report_id){		
 			
 			var optionsStr =jQuery('input.options_str').val();			
 			options=jQuery.parseJSON(decodeURIComponent(decodeURIComponent(optionsStr)));
@@ -234,7 +237,7 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 			whole_title="";
 			graph_count=0;																
 			all_label=[];			
-            return_data=construct_graph_data(options);
+            return_data=construct_graph_data(options,report_id);
 			//console.log(return_data);
 			whole_data_list=return_data["whole_data_list"];
 			all_diagram_type=return_data["all_diagram_type"];
@@ -365,5 +368,12 @@ jQuery('.excel_export_graph_data:visible').live('click',function(){
 			  }
 			});
 		}
+		
+		jQuery('.chartContainer').each(function(index){
+			classes=jQuery(this).attr('class').split(" ");
+			report_id=classes[classes.length-1];
+			draw_data_diagram(report_id);
+			
+		});
 			
 });

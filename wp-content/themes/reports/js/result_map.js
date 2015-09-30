@@ -53,7 +53,7 @@ function initialize(){
 			mc = new MarkerClusterer(map, [], mcOptions);
 			
 		jQuery('div.statistics_store').each(function(whole_index){			
-		
+			
 			classes=jQuery(this).attr('class').split(" ");		
 			if(classes[1]!=undefined){			
 				logic_field=classes[1];
@@ -64,11 +64,10 @@ function initialize(){
 			}		
 			
 			jQuery('input.location_stats'+data_type_class).each(function(index){
-		
+				//alert(index);
 				label=jQuery('input.label.'+index+data_type_class).val();					
 				geolocation=jQuery('input.geolocation.'+index+data_type_class).val();
-				console.log(data_type_class);
-				console.log(geolocation);
+			
 				link=jQuery('input.data_slice_link.'+index+data_type_class).val();
 				value=jQuery(this).val();	
 				label+='('+value+')';

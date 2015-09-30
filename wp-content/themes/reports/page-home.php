@@ -18,7 +18,7 @@ get_header('reports');
  
  foreach($all_reports as $one_report){
 	//debug($one_report);
-	debug($one_report['reports_filters_groups']);
+	//debug($one_report['reports_filters_groups']);
 	echo "<article>";
 	?>
 	<header class="entry-header">
@@ -29,9 +29,28 @@ get_header('reports');
 	</header>
 	
 	<?php
-	$report_report=load_report($one_report['reports_filters_groups'],$one_report['reports_options']);	?>
+	$report_report=load_report($one_report['reports_filters_groups'],$one_report['reports_options']);
+	
+	?>
 	<div class="entry-content">
-		<?php echo $report_report;?>
+		<?php 
+		
+			$options=json_decode(urldecode($one_report['reports_options']),true);
+			//debug($options);die;
+			switch($options['render_type']){				
+				case "cluster":
+					include('inc/cluster.php');
+					break;
+				case "graph":
+					include('inc/graph.php');
+					break;
+				case "map":
+					include('inc/map.php');
+					break;	
+			}
+			
+		
+		?>
 	</div>
 	<?php
 	echo "</article>";
@@ -40,5 +59,5 @@ get_header('reports');
 		//get_template_part( 'content', get_post_format() );
  }
  
- get_footer('reports');
+ //get_footer('reports');
  ?>

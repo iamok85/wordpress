@@ -69,7 +69,8 @@ $table_prefix  = 'wp_';
  * in their development environments.
  */
 define('WP_DEBUG', true);
-
+define('API_URL_HOME','http://local.reportapp.com:8080/index.php');
+define('API_URL','http://local.reportapp.com:8080/index.php/search/search_ajax');
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
