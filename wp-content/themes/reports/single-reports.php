@@ -24,14 +24,33 @@ get_header('reports'); ?>
 		 <?	
 			$reports_filters_groups=get_post_meta(get_the_ID(),'reports_filters_groups');
 			$reports_options=get_post_meta(get_the_ID(),'reports_options');
+			
+			$one_report=array('ID'=>get_the_ID(),'reports_options'=>$reports_options,'reports_filters_groups'=>$reports_filters_groups,'reports_titles'=>$reports_titles);
 			?>
 			<div class="entry-content">
 			
-			<?php 
-				
-				echo load_report($reports_filters_groups[0],$reports_options[0]);
-				 reportApp_post_nav(); 
-			?>
+			<?php $report_report=load_report($reports_filters_groups[0],$reports_options[0]);?>
+	<div class="entry-content">
+		<?php 
+		
+			$options=json_decode(urldecode($reports_options[0]),true);
+			//debug($options);
+			switch($options['render_type']){				
+				case "cluster":
+					include('inc/cluster.php');
+					break;
+				case "graph":
+					include('inc/graph.php');
+					break;
+				case "map":
+					include('inc/map.php');
+					break;	
+			}
+			
+		
+		?>
+	</div>
+			<?php reportApp_post_nav();?>
 			</div>
 		
 		</article>

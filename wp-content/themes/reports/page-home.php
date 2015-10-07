@@ -10,7 +10,6 @@
 
 get_header('reports');
  use lib\controllers\ReportsSearchPost;
-
  
  $reports=new ReportsSearchPost();
  $reports->allFilter(); 
@@ -36,7 +35,7 @@ get_header('reports');
 		<?php 
 		
 			$options=json_decode(urldecode($one_report['reports_options']),true);
-			//debug($options);die;
+	
 			switch($options['render_type']){				
 				case "cluster":
 					include('inc/cluster.php');
@@ -54,10 +53,6 @@ get_header('reports');
 	</div>
 	<?php
 	echo "</article>";
-	
-	 //comments_template($one_report['ID']);
-		//get_template_part( 'content', get_post_format() );
- }
- 
- //get_footer('reports');
+	 }
+
  ?>

@@ -548,9 +548,7 @@ function my_scripts_method() {
 			'google_api2'=>'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclustererplus/src/markerclusterer.js',
 			'result_map'=>get_bloginfo('template_directory')."/js/result_map.js",
 			'page_map'=>get_bloginfo('template_directory')."/js/page_map.js",
-			'foam'=>get_bloginfo('template_directory')."/js/foam/carrotsearch.foamtree.js",
-			
-			
+			'foam'=>get_bloginfo('template_directory')."/js/foam/carrotsearch.foamtree.js"
 		);
 	
 	foreach($_scripts as $handle=>$src){
