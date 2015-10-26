@@ -29,6 +29,8 @@ class reports_entity extends entity
 	 var $field_list=array(
 	 		
 	 		'reports_titles'=>array('label'=>'Report Title','type'=>'text','post_type'=>'reports'),
+	 		'reports_sid'=>array('label'=>'Report ID', 'value'=>'','type'=>'text','post_type'=>'reports'),
+			//'reports_sid'=>array('label'=>'Report ID','type'=>'text','post_type'=>'reports'),
 			'reports_filters_groups'=>array('label'=>'Filters Groups','type'=>'hidden','post_type'=>'reports'),
 			'reports_options'=>array('label'=>'Options','type'=>'hidden','post_type'=>'reports')			
 		);

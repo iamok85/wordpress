@@ -297,7 +297,7 @@ class reportApp
 			'no_fields'			=>	__("No toggle fields available",'reportApp'),			
 			'copy'				=>	__("copy",'reportApp'),
 			'or'				=>	__("or",'reportApp'),
-			'fields'			=>	__("Fields",'acf'),
+			'fields'			=>	__("Fields",'reportApp'),
 			'parent_fields'		=>	__("Parent fields",'reportApp'),
 			'sibling_fields'	=>	__("Sibling fields",'reportApp'),
 			'hide_show_all'		=>	__("Hide / Show All",'reportApp')

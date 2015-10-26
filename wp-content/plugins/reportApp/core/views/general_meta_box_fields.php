@@ -6,7 +6,7 @@
 
 <?php foreach($reports_field_list as $logicfield=>$field_data):?>
 
-			 
+			 <?php debug($field_data);?>
 	          <?if(is_array($field_data)&&isset($field_data['label'])){?>
 				
 						<tr class="field_label">

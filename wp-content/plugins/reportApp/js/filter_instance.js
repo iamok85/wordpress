@@ -485,18 +485,20 @@ $.fn.filter_seralize=function(cmd,arg){
 	
 	function bindAddFilter(){		
 		/*Add a new And Filter to a filter group*/
-		classes=this_group.attr('class').split(' ');
-		filter_index=classes[1];
-		jQuery('.add_and_filter.'+filter_index).unbind('click');				
-		jQuery('.add_and_filter.'+filter_index).bind('click',function(){									
-			
-			classes=jQuery(this).attr('class').split(' ');
-						
+		if(this_group){
+			classes=this_group.attr('class').split(' ');
 			filter_index=classes[1];
-			//console.log(options);			
-			jQuery('.filters_groups_instance.'+filter_index).filters('add_filter',{filters:[{name:''}]});			
-			
-		});		
+			jQuery('.add_and_filter.'+filter_index).unbind('click');				
+			jQuery('.add_and_filter.'+filter_index).bind('click',function(){									
+				
+				classes=jQuery(this).attr('class').split(' ');
+							
+				filter_index=classes[1];
+				//console.log(options);			
+				jQuery('.filters_groups_instance.'+filter_index).filters('add_filter',{filters:[{name:''}]});			
+				
+			});		
+		}
 	}
 	
 	
