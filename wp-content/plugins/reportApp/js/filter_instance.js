@@ -485,7 +485,7 @@ $.fn.filter_seralize=function(cmd,arg){
 	
 	function bindAddFilter(){		
 		/*Add a new And Filter to a filter group*/
-		if(this_group){
+		if(this_group.attr('class')){
 			classes=this_group.attr('class').split(' ');
 			filter_index=classes[1];
 			jQuery('.add_and_filter.'+filter_index).unbind('click');				
